@@ -1,0 +1,60 @@
+<head>
+    <script type="text/javascript" src="/static/js/style.js"></script>
+    <script type="text/javascript">
+        function promptOnClose(e) {
+            var promptString = '请确认您当前的内容已经妥善转存！';
+            return promptString;
+        }
+        if (window != top) {
+            top.location.href = "http://wxedit.yead.net";
+        }
+        else {
+            if (window.Event) {
+                window.onbeforeunload = function (event) {
+                    return promptOnClose(event);
+                }
+            }
+            else {
+                window.onbeforeunload = function () {
+                    return promptOnClose(event);
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+
+
+<footer>
+    <div id="roll">
+        <div title="回到顶部" id="roll_top"></div>
+    </div>
+</footer>
+
+<div id="edui_fixedlayer" class="edui-default" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;">
+    <div id="edui157" class="edui-popup  edui-bubble edui-default" onmousedown="return false;" style="display: none;">
+        <div id="edui157_body" class="edui-popup-body ed-default">
+            <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0"
+                    width="100%" height="100%" src="about:blank" class="edui-default"></iframe>
+            <div class="edui-shadow edui-default"></div>
+            <div id="edui157_content" class="edui-popup-content edui-default"></div>
+        </div>
+    </div>
+</div>
+<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container"
+     style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;">
+    <object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" width="100%" height="100%"
+            type="application/x-shockwave-flash"
+            data="http://wxedit.yead.net/ueditor/third-party/zeroclipboard/ZeroClipboard.swf?noCache=1432443513170">
+        <param name="allowScriptAccess" value="sameDomain">
+        <param name="allowNetworking" value="all">
+        <param name="menu" value="false">
+        <param name="wmode" value="transparent">
+        <param name="flashvars"
+               value="trustedOrigins=wxedit.yead.net%2C%2F%2Fwxedit.yead.net%2Chttp%3A%2F%2Fwxedit.yead.net">
+    </object>
+</div>
+</body>
+</html>
