@@ -84,7 +84,9 @@ STATICFILES_DIRS = (
     ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),  
     ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ), 
     ('images',os.path.join(STATIC_ROOT,'images').replace('\\','/') ), 
-    ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ), 
+    ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ),
+    ('bower_components',os.path.join(STATIC_ROOT,'bower_components').replace('\\','/') ),
+    ('fonts', os.path.join(STATIC_ROOT,'fonts').replace('\\','/')),
 )
 
 # List of finder classes that know how to find static files in
@@ -142,7 +144,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ueditor.app.Ueditor',
-    
+    'ueditor.app.ECommunity'
+
    
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',

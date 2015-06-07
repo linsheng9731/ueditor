@@ -15,6 +15,7 @@
     <script type="text/javascript" charset="utf-8" src="/static/js/ueditor/editor_all.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/js/ueditor/themes/default/ueditor.css"/>
     <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         function promptOnClose(e) {
             var promptString = '请确认您当前的内容已经妥善转存！';
@@ -1889,18 +1890,27 @@
                 <div class="r">
                     <div class="section">
                         <p style="margin-bottom:30px;">
-                            <label for="article-title" style="font-size: 30px;">文章标题:</label>
+                            <label for="article-title" style="font-size: 30px;">标题:</label>
                             <input id="article-title" type="text"
                                    style="font-size: 30px; border: 1px solid cornflowerblue; position: relative; width: 466px;"/>
                         </p>
 
                         <p style="margin-bottom:30px;">
                             <label for="article-catalog" style="font-size: 30px;">频道:</label>
-                            <input type="text" id="catalog"
-                                   style="font-size: 30px; border: 1px solid cornflowerblue; position: relative; width: 466px;"/>
+                            <select>
+                                <option value="null">请选择</option>
+                                <option>Volvo</option>
+                                <option>Saab</option>
+                                <option>Mercedes</option>
+                                <option>Audi</option>
+                            </select>
                         </p>
 
-                        <p class="note"></p>
+
+                         <p>
+                            <label for="article-desc" style="font-size: 30px; vertical-align: top">描述:</label>
+                             <textarea  id="article-desc" rows="4" cols="70" style="border:1px solid "></textarea>
+                         </p>
 
                         <div class="details">
                             <div>
@@ -1908,7 +1918,7 @@
                                     {% csrf_token %}
                                     <textarea id="editor" name="editor"
                                               style="width:600px;height:500px;">{{ article.content }}</textarea>
-                                    <input id="saveSubmit"   type="button" value="保存发布"/>
+                                    <input id="saveSubmit" type="button" value="保存发布"/>
                                 </form>
                             </div>
                         </div>
@@ -1940,12 +1950,6 @@
 </section>
 ﻿
 <footer>
-    <div id="footer_main">
-        立足太原，为全国微企提供微信运营技术支持！<br>
-        联系微信/QQ：438282 -
-        - 晋ICP备11005700号<br>
-        本系统由 太原易点网络 开发维护
-    </div>
     <div id="roll">
         <div title="回到顶部" id="roll_top"></div>
     </div>
@@ -1995,25 +1999,6 @@
         alert(txt)
     }
 
-    function saveSubmit() {
-        var content = ue.getContent();
-        var firstImage = $(content).find("img")[0];
-        var imageSrc = firstImage && firstImage.src || "null";
-        var data = {
-            'content': content,
-            'title': $("#article-title").val(),
-            'catalog': $('#catalog').val(),
-            'image': imageSrc
-        };
-        $.post('/save', data, function (msg) {
-            msg = JSON.parse(msg);
-            if (msg.status === 'success') {
-                alert("保存成功");
-            }
-        })
-    }
-
-    $("#saveSubmit").click(saveSubmit);
 
     function testueditor() {
         mycontent = ue.getContentTxt();
@@ -2073,7 +2058,7 @@
     }
 
 </script>
-
+<script src="/static/js/editorAbner.js"></script>
 <script type="text/javascript" src="/static/js/farbtastic.js"></script>
 <script type="text/javascript" src="/static/js/bang.widget.style.js"></script>
 </body>

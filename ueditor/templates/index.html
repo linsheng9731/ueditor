@@ -1,0 +1,93 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo">
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+    <link href="{% static "css/chosen.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "bower_components/angular/angular.min.js" %} "></script>
+    <script src="{% static "js/ui-bootstrap-tpls-0.12.1.js" %}"></script>
+    <script src="{% static "bower_components/angular-http-loader/app/package/js/angular-http-loader.min.js" %}"></script>
+    <script src="{% static "js/mainView.js" %}"></script>
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/mainView.css" %}" rel="stylesheet">
+    <title>专利结果展示</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+{% verbatim %}
+
+<div ng-controller="AccordionDemoCtrl">
+
+    <div class="container">
+        <div style="text-align: center">
+        <span class="company-name">
+                {{ userName }},欢迎您</span>
+        </div>
+
+        <div class="content">
+            <script type="text/ng-template"
+                    id="example-loader.tpl.html">
+                <div class="flyover">
+                    <div class="mask"></div>
+                    <div class="alert alert-info">
+                        <strong>载入中<i class="glyphicon glyphicon-refresh fa-spin"></i></strong>
+                    </div>
+                </div>
+            </script>
+            <div ng-http-loader
+                 title="Foo"
+                 ttl="1"
+                 template="example-loader.tpl.html"></div>
+
+            <div class="col-lg-12">
+
+                <p ng-if="totalItems===0" style="text-align: center;font-size: 25px;margin: 50px 0 100px 0;">
+                    您还未发表文章
+                </p>
+
+                <p ng-if="totalItems>0" style="text-align: center;font-size: 25px;margin: 50px 0 100px 0;">
+                    您已发表{{ totalItems }}文章
+                </p>
+
+                <ol style="background-color: rgb(248, 248, 248);" class="col-lg-8 col-lg-offset-2">
+                    <li ng-repeat="article in articles" class="item">
+                        <span>{{ article.title }}</span>
+                        <a href="###" ng-click="modify(article.id)"
+                           style="float: right; margin:-4px 12px 0 30px;" class="btn btn-primary"  role="button">
+                                修改文章</a>
+
+
+                    </li>
+                </ol>
+            </div>
+            <div style="text-align: center" class="col-lg-6 col-lg-offset-3">
+                <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm" boundary-links="true" rotate="false"
+                            num-pages="numPages" ng-change="pageChanged()"></pagination>
+            </div>
+
+            </idv>
+
+            <div class="quarter" style="display: none;"></div>
+        </div>
+
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+{% endverbatim %}
+</body>
+
+</html>

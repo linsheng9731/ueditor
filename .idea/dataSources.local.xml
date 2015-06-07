@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Django default" uuid="0246a254-7999-4392-b43c-c0b954de826a">
+      <user-name>Spider</user-name>
+      <user-password>dfdadfcbdfd9dfd9dfdddf9adfd8dfce</user-password>
+      <schema-pattern>ECommunity.*</schema-pattern>
+      <default-schemas>ECommunity.*</default-schemas>
+    </data-source>
+  </component>
+</project>
