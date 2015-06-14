@@ -3,7 +3,9 @@
 Created on 2012-8-29
 @author: Administrator
 '''
+server_address = "http://192.168.1.103:8000"
 from ueditor import settings
+
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -15,11 +17,14 @@ import os
 import time
 import urllib2
 import uuid
-from ueditor.app.ECommunity.models import Article, Channel, Customer
+from ueditor.app.ECommunity.models import Article, Channel, Customer, AppSeting
 import datetime
 import json
+from django.contrib.auth import *
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def testueditor(request):
     context = {}
     context.update(csrf(request))
@@ -53,7 +58,7 @@ def __myuploadfile(fileObj, source_pictitle, source_filename, fileorpic='pic'):
                     im.thumbnail((720, 720))
                     im.save(phisypath)
 
-            real_url = '/static/upload/' + subfolder + '/' + file_name + '.' + fileExt
+            real_url = server_address +  '/static/upload/' + subfolder + '/' + file_name + '.' + fileExt
             myresponse = "{'original':'%s','url':'%s','title':'%s','state':'%s'}" % (
             source_filename, real_url, source_pictitle, 'SUCCESS')
     return myresponse
@@ -147,7 +152,7 @@ def ueditor_getRemoteImage(request):
             picfile = open(phisypath, 'wb')
             picfile.write(piccontent)
             picfile.close()
-            outlist.append('/static/upload/' + subfolder + '/' + file_name + '.' + fileExt)
+            outlist.append( server_address+'/static/upload/' + subfolder + '/' + file_name + '.' + fileExt)
     outlist = "ue_separate_ue".join(outlist)
 
     response = HttpResponse()
@@ -201,27 +206,110 @@ def ueditor_getMovie(request):
     response.write(content);
     return response
 
+@login_required
 @csrf_exempt
 def save(request):
     #保存文章
-    if 'content' not in request.POST or 'title' not in request.POST or 'catalog' not in request.POST or \
+    if 'content' not in request.POST or 'title' not in request.POST or \
                     'image' not in request.POST:
         return HttpResponse(json.dumps({'status': 'fail'}))
 
+    customer = Customer.objects.filter(user=request.user)[0]
+
     title = request.POST['title']
-    catalog = request.POST['catalog']
+    desc = request.POST['desc']
     content = request.POST['content']
     imagesrc = request.POST['image']
-    time = datetime.datetime.now()
-    channel = Channel.objects.get(id=1)  #todo 改为保存过来的channel
+    time = datetime.datetime.now().date()
+    channel = request.POST['channel']
+    channel_object = Channel.objects.get(title=channel)
     article = Article.objects.create(author="abnerzheng",
                                      title=title,
                                      body=content,
                                      image=imagesrc,
-                                     channel=channel,
-                                     type="hehe",
+                                     channel=channel_object,
+                                     type="1",
                                      create_time=time,
                                      url="www.baidu.com",
-                                     desc="hheehhehe",
+                                     desc= desc,
                                      day="1")
+
+    customer.articles.add(article)
     return HttpResponse(json.dumps({"status":"success"}))
+
+@csrf_exempt
+def app_imgUp(request):
+    # APP首页图片上传
+    fileObj = request.FILES.get('upfile', None)
+
+    phone = request.POST.get('phone', '')
+    password = request.POST.get('password', '')
+    pictitle = "app" + "_pic"
+    source_filename = "app" + "_pic"
+
+    user = authenticate(username=phone, password=password)
+    myresponse = __myuploadfile_2(fileObj, pictitle, source_filename, 'pic')
+    st = AppSeting.objects.all()[0]
+    st.image = myresponse['real_url']
+    st.save()
+    res = HttpResponse(json.dumps({"state":"success"}))
+    res["Access-Control-Allow-Origin"] = "*" #todo 得防止一下
+    return res
+
+
+@csrf_exempt
+def user_imgUp(request):
+    """ 个人图片上传 """
+    fileObj = request.FILES.get('upfile', None)
+
+    phone = request.POST.get('phone', '')
+    password = request.POST.get('password', '')
+    pictitle = phone + "_pic"
+    source_filename = phone + "_pic"
+
+    user = authenticate(username=phone,password=password)
+
+    if user is not None:
+        customer = Customer.objects.get(user=user)
+        myresponse = __myuploadfile_2(fileObj, pictitle, source_filename, 'pic')
+        customer.icon = myresponse["real_url"]
+        customer.save()
+
+        return HttpResponse(json.dumps({"state":"success", "url":myresponse["real_url"] }))
+
+    return HttpResponse(json.dumps({"state":"fail"}))
+
+
+def __myuploadfile_2(fileObj, source_pictitle, source_filename, fileorpic='pic'):
+    """ 一个公用的上传文件的处理 """
+    myresponse = ""
+    if fileObj:
+        filename = fileObj.name.decode('utf-8', 'ignore')
+        fileExt = filename.split('.')[1]
+        file_name = str(uuid.uuid1())
+        subfolder = time.strftime("%Y%m")
+        if not os.path.exists(settings.MEDIA_ROOT[0] + subfolder):
+            os.makedirs(settings.MEDIA_ROOT[0] + subfolder)
+        path = str(subfolder + '/' + file_name + '.' + fileExt)
+
+        if fileExt.lower() in (
+        'jpg', 'jpeg', 'bmp', 'gif', 'png', "rar", "doc", "docx", "zip", "pdf", "txt", "swf", "wmv"):
+
+            phisypath = settings.MEDIA_ROOT[0] + path
+            destination = open(phisypath, 'wb+')
+            for chunk in fileObj.chunks():
+                destination.write(chunk)
+            destination.close()
+
+            if fileorpic == 'pic':
+                if fileExt.lower() in ('jpg', 'jpeg', 'bmp', 'gif', 'png'):
+                    im = Image.open(phisypath)
+                    im.thumbnail((720, 720))
+                    im.save(phisypath)
+
+            real_url = server_address +  '/static/upload/' + subfolder + '/' + file_name + '.' + fileExt
+            myresponse =  {
+                "source_filename":source_filename, "real_url":real_url, "source_pictitle":source_pictitle,
+                "state":'SUCCESS'
+            }
+    return myresponse

@@ -38,7 +38,7 @@ $(document).ready(function () {
         $.get('/getArticleInfo', {id: id}, function (data) {
             data = JSON.parse(data)
             $("#article-title").val(data.title)
-            ue.setContent(data['body']);
+            ue.setContent('<p><img src="'+ data.image + '" /></p>'+data['body']);
             $("select").val(data['channel'])
             $("#article-desc").val(data['desc'])
             console.log(data);
@@ -50,14 +50,22 @@ $(document).ready(function () {
 
     function saveSubmit() {
         var content = ue.getContent();
-        var firstImage = $(content).find("img")[0];
+        var imgs =  $(content).find("img");
+        var firstImage =imgs[0]
+        imgs.each(function(i,e){
+            if(e.src.search(window.location.host) === -1){
+                e.src = "http://" + window.location.host + e.src;
+            }
+        })
+        $(content).find("p").remove();
         var imageSrc = firstImage && firstImage.src || "null";
         var data = {
             'content': content,
             'title': $("#article-title").val(),
-            'catalog': $('#catalog').val(),
+            'desc': $('#article-desc').val(),
             'image': imageSrc,
-            'id':id
+            'id':id,
+            'channel':$("select").val()
         };
         var url = type === "modify"? "/modify": "/save";
         $.post(url, data, function (msg) {
@@ -67,6 +75,4 @@ $(document).ready(function () {
                 }
             })
         }
-
-
 });

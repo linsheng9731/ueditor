@@ -1031,6 +1031,10 @@ span.edui-unclickable {
     line-height: 14px;
 }
 
+.edui-for-inserthtmlvideo .edui-icon {
+    background-position: -700px -40px;
+}
+
 /* ui.Editor */
 .edui-editor {
     border:  1px solid #ccc;

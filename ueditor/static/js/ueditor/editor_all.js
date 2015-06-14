@@ -5381,6 +5381,11 @@ UE.plugins['font'] = function() {
 
         }
     }
+    UE.commands['inserthtmlvideo'] = {
+        execCommand : function(cmdName, opt){
+            document.getElementById("inserthtmlvideo").style.display = "block";
+        }
+    }
     UE.commands['link'] = {
         queryCommandState : function(){
             return this.highlight ? -1 :0;
@@ -10731,7 +10736,7 @@ UE.plugins['video'] = function (){
         div;
 
     /**
-     * 创建插入视频字符窜
+     * 创建插入视频字符窜创建插入视频字符窜
      * @param url 视频地址
      * @param width 视频宽度
      * @param height 视频高度
@@ -15371,7 +15376,7 @@ baidu.editor.ui = {};
         'blockquote', 'pasteplain', 'pagebreak',
         'selectall', 'print', 'preview', 'horizontal', 'removeformat', 'time', 'date', 'unlink',
         'insertparagraphbeforetable', 'insertrow', 'insertcol', 'mergeright', 'mergedown', 'deleterow',
-        'deletecol', 'splittorows', 'splittocols', 'splittocells', 'mergecells', 'deletetable'];
+        'deletecol', 'splittorows', 'splittocols', 'splittocells', 'mergecells', 'deletetable','inserthtmlvideo'];
 
     for ( var i = 0, ci; ci = btnCmds[i++]; ) {
         ci = ci.toLowerCase();

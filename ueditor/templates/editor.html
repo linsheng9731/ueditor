@@ -1907,10 +1907,10 @@
                         </p>
 
 
-                         <p>
+                        <p>
                             <label for="article-desc" style="font-size: 30px; vertical-align: top">描述:</label>
-                             <textarea  id="article-desc" rows="4" cols="70" style="border:1px solid "></textarea>
-                         </p>
+                            <textarea id="article-desc" rows="4" cols="70" style="border:1px solid "></textarea>
+                        </p>
 
                         <div class="details">
                             <div>
@@ -1924,30 +1924,84 @@
                         </div>
 
                     </div>
-                    <div class="section">
-                        <h4>常用API</h4>
-
-                        <div id="allbtn" class="details">
-                            <ul>
-                                <li><a onclick="getContent()">获得内容</a></li>
-                                <li><a onclick="setContent()">写入内容</a></li>
-                                <li><a onclick="getContentTxt()">获得纯文本</a></li>
-                                <li><a onclick="getPlainTxt()">获得带格式的纯文本</a></li>
-                                <li><a onclick="hasContent()">判断是否有内容</a></li>
-                                <li><a onclick="setFocus()">使编辑器获得焦点</a></li>
-                                <li><a onclick="getText()">获得当前选中的文本</a></li>
-                                <li><a onclick="deleteEditor()">删除编辑器</a></li>
-                                <li><a onclick="setEnabled()">可以编辑</a></li>
-                                <li><a onclick="setDisable()">不可编辑</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+
+<div id="inserthtmlvideo" class="edui-dialog edui-for-insertvideo edui-dialog edui-for-insertvideo"
+     style="left: 270px; top: 50px; z-index: 1009; display: none; position: fixed;">
+    <div class="edui-dialog-wrap">
+        <div  class="edui-dialog-body" style="width: 590px; height: 457px;">
+            <div class="edui-dialog-shadow"></div>
+            <div id="edui155_titlebar" class="edui-dialog-titlebar">
+                <div class="edui-dialog-draghandle"
+                     onmousedown="$EDITORUI[&quot;edui155&quot;]._onTitlebarMouseDown(event, this);"><span
+                        class="edui-dialog-caption">插入HTML5视频</span></div>
+                <div id="edui156" class="edui-box edui-button edui-dialog-closebutton">
+                    <div id="edui156_state"
+                         onmousedown="$EDITORUI[&quot;edui156&quot;].Stateful_onMouseDown(event, this);"
+                         onmouseup="$EDITORUI[&quot;edui156&quot;].Stateful_onMouseUp(event, this);"
+                         onmouseover="$EDITORUI[&quot;edui156&quot;].Stateful_onMouseOver(event, this);"
+                         onmouseout="$EDITORUI[&quot;edui156&quot;].Stateful_onMouseOut(event, this);">
+                        <div class="edui-button-wrap">
+                            <div id="edui156_body" unselectable="on" title="关闭对话框" class="edui-button-body"
+                                 onmousedown="return false;"
+                                 onclick='document.getElementById("inserthtmlvideo").style.display="none"'>
+                                <div class="edui-box edui-icon"></div>
+                                <div class="edui-box edui-label"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="heheh" class="edui-dialog-content"><span  class="dialogcontmask"
+                                                                        style="visibility: hidden;"></span>
+
+                <h1 style="text-align: center">请在下面插入HTML5视频地址</h1>
+                <textarea id="htmlvideo"
+                          style=" width: 90%; height: 70%; margin: 3% 5%;border: 1px solid black "></textarea>
+            </div>
+            <div class="edui-dialog-foot">
+                <div id="edui155_buttons" class="edui-dialog-buttons">
+                    <div id="" class="edui-box edui-button edui-okbutton">
+                        <div id="edui157_state"
+                             onmousedown="$EDITORUI[&quot;edui157&quot;].Stateful_onMouseDown(event, this);"
+                             onmouseup="$EDITORUI[&quot;edui157&quot;].Stateful_onMouseUp(event, this);"
+                             onmouseover="$EDITORUI[&quot;edui157&quot;].Stateful_onMouseOver(event, this);"
+                             onmouseout="$EDITORUI[&quot;edui157&quot;].Stateful_onMouseOut(event, this);">
+                            <div class="edui-button-wrap">
+                                <div id="edui157_body" unselectable="on" class="edui-button-body"
+                                     onmousedown="return false;" onclick="insertvideo()">
+                                    <div class="edui-box edui-icon"></div>
+                                    <div class="heheh">确认</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="edui158" class="edui-box edui-button edui-cancelbutton">
+                        <div id="edui158_state"
+                             onmousedown="$EDITORUI[&quot;edui158&quot;].Stateful_onMouseDown(event, this);"
+                             onmouseup="$EDITORUI[&quot;edui158&quot;].Stateful_onMouseUp(event, this);"
+                             onmouseover="$EDITORUI[&quot;edui158&quot;].Stateful_onMouseOver(event, this);"
+                             onmouseout="$EDITORUI[&quot;edui158&quot;].Stateful_onMouseOut(event, this);">
+                            <div class="edui-button-wrap">
+                                <div id="edui158_body" unselectable="on" class="edui-button-body"
+                                     onmousedown="return false;"
+                                     onclick='document.getElementById("inserthtmlvideo").style.display="none"'>
+                                    <div class="edui-box edui-icon"></div>
+                                    <div class="edui-box edui-label">取消</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 ﻿
 <footer>
     <div id="roll">
@@ -1970,6 +2024,12 @@
         }
 
     });
+    function insertvideo() {
+        var content = document.getElementById("htmlvideo").value;
+        document.getElementById("htmlvideo").value= "";
+        ue.execCommand('insertHtml', content);
+        document.getElementById("inserthtmlvideo").style.display = "none";
+    }
     function getContent() {
         var arr = [];
         arr.push("使用editor.getContent()方法可以获得编辑器的内容");

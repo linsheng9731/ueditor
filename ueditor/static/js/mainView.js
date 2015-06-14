@@ -15,6 +15,7 @@ angular.module('ui.bootstrap.demo').config(['httpMethodInterceptorProvider',
             console.log(msg)
             $scope.userName = msg.name
             $scope.articles = msg.articles;
+            $scope.totalItems = msg.articles.length;
         });
         function get_infoAndArticle(){
 

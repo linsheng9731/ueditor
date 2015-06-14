@@ -20,6 +20,7 @@
       <column name="desc" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
       <column name="day" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="text" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="read_times" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="ECommunity__channel_id_4b985e191495859d_fk_ECommunity_channel_id" columns="channel_id" ref-table="ECommunity_channel" ref-schema="" ref-catalog="ECommunity" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="ECommunity__article_id_2301f01ce8ee5b09_fk_ECommunity_article_id" table="ECommunity_comment" schema="" catalog="ECommunity" columns="article_id"/>
@@ -112,6 +113,12 @@
       <foreign-key name="ECommunit_customer_id_6c0364782f454e8c_fk_ECommunity_customer_id" columns="customer_id" ref-table="ECommunity_customer" ref-schema="" ref-catalog="ECommunity" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="customer_id" unique="true" columns="channel_id"/>
       <index name="ECommunity__channel_id_7ddbaa0f7230f37a_fk_ECommunity_channel_id" unique="false" columns="channel_id"/>
+    </table>
+    <table name="ECommunity_search" schema="" catalog="ECommunity" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="keyword" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="freq" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="auth_group" schema="" catalog="ECommunity" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

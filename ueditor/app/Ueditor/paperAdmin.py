@@ -50,16 +50,45 @@ def getArticleInfo(request):
     if article:
         request.session['article_id'] = articleId
         serObj = ser(article,
-            ['title','author','body','desc']
+            ['title','author','body','desc','image']
                                            ,False)[0]
         serObj['channel'] = article[0].channel.title
         return HttpResponse(json.dumps(serObj))
     else:
-        return HttpResponse(json.dumps({"state":"fail"}))
 
+        return HttpResponse(json.dumps({"state":"fail"}))
 
 def getChannels(request):
     channels = Channel.objects.filter(type=1).only('title')
     rt = [{'title': e.title} for e in channels]
     return HttpResponse(json.dumps(rt))
+
+@csrf_exempt
+def modify(request):
+    id = request.POST["id"]
+    if request.session['article_id'] != id:
+        return HttpResponse(json.dumps({"state":"fail"}))
+    else:
+        if 'content' not in request.POST or 'title' not in request.POST or \
+                    'image' not in request.POST:
+            return HttpResponse(json.dumps({'status': 'fail'}))
+
+        title = request.POST['title']
+        desc = request.POST['desc']
+        content = request.POST['content']
+        imagesrc = request.POST['image']
+        channel = request.POST['channel']
+        channel = Channel.objects.get(title=channel)
+
+        article = Article.objects.get(id=id)
+        article.desc = desc
+        article.title= title
+        article.body = content
+        article.image = imagesrc
+        article.channel = channel
+
+        article.save()
+
+        return HttpResponse(json.dumps({"status":"success"}))
+
 
