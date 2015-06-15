@@ -31,7 +31,7 @@
     <div class="container">
         <div style="text-align: center">
         <span class="company-name">
-                {{ userName }},欢迎您</span>
+                {{ userName }}欢迎您</span>
         </div>
 
         <div class="content">
@@ -53,11 +53,14 @@
 
                 <p ng-if="totalItems===0" style="text-align: center;font-size: 25px;margin: 50px 0 100px 0;">
                     您还未发表文章
+                <a role="button" class="btn btn-success" ng-href="/editor">发表文章</a>
                 </p>
 
-                <p ng-if="totalItems>0" style="text-align: center;font-size: 25px;margin: 50px 0 100px 0;">
+                <p ng-if="totalItems>0" style="text-align: center;font-size: 25px;margin: 50px 0 10px 0;">
                     您已发表&nbsp;{{ totalItems }}&nbsp;篇文章
+                      <a role="button" class="btn btn-success" ng-href="/editor">发表文章</a>
                 </p>
+
 
                 <ol style="background-color: rgb(248, 248, 248);" class="col-lg-8 col-lg-offset-2">
                     <li ng-repeat="article in articles" class="item">
@@ -65,7 +68,6 @@
                         <a href="###" ng-click="modify(article.id)"
                            style="float: right; margin:-4px 12px 0 30px;" class="btn btn-primary"  role="button">
                                 修改文章</a>
-
 
                     </li>
                 </ol>

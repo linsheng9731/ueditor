@@ -11,35 +11,30 @@ angular.module('ui.bootstrap.demo').config(['httpMethodInterceptorProvider',
         }]
 ).controller('AccordionDemoCtrl', function ($scope, $http) {
         $scope.userName = "";
-        $http.get('/getArticles').success(function(msg){
+        $http.get('/getArticles').success(function (msg) {
             console.log(msg)
-            $scope.userName = msg.name
+            $scope.userName = msg.name === "" ? "":msg.name + ",";
             $scope.articles = msg.articles;
-            $scope.totalItems = msg.articles.length;
+            $scope.bigTotalItems = msg.count;
+            $scope.totalItems = msg.count;
         });
-        function get_infoAndArticle(){
 
-        }
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo; //选择页码
+        };
 
-        $scope.modify = function(id){
+        $scope.modify = function (id) {
             window.location.href = '/editor?article_id=' + id;
         }
 
-    })
+        $scope.bigCurrentPage = 1; //目前分页所在页码
+        $scope.bigTotalItems = 0; //总条目数
 
-//angular.module('ui.bootstrap.demo').controller('AccordionDemoCtrl', function ($scope, $log) {
-//  $scope.totalItems = 64;
-//  $scope.currentPage = 4;
-//
-//  $scope.setPage = function (pageNo) {
-//    $scope.currentPage = pageNo;
-//  };
-//
-//  $scope.pageChanged = function() {
-//    $log.log('Page changed to: ' + $scope.currentPage);
-//  };
-//
-//  $scope.maxSize = 5;
-//  $scope.bigTotalItems = 175;
-//  $scope.bigCurrentPage = 1;
-//});
+        $scope.pageChanged = function () {
+            $http.get('/getArticles?page='+$scope.bigCurrentPage).success(function (msg) {
+                console.log(msg);
+                $scope.articles = msg.articles;
+            })
+        };
+
+    })

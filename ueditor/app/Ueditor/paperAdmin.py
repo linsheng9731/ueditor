@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
 
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 from ueditor.app.ECommunity.models import Customer,Article, Channel
 import json
 import uuid
@@ -32,6 +33,7 @@ def index(request):
     return render_to_response('index.html')
 
 
+
 @login_required
 def getArticles(request):
     user = request.user
@@ -39,7 +41,18 @@ def getArticles(request):
 
     if custome and custome[0].type == "E":
         articles = custome[0].articles.all()
-        return HttpResponse(json.dumps({'articles':ser(articles,['id','title'],False),'name':custome[0].nickname}))
+        p = Paginator(articles,10)
+        page = int(request.GET.get("page", 1))
+        ma = max(p.page_range)
+        if 1<=page<=ma:
+            page = page
+        else:
+            page = 1
+        articles = p.page(page)
+        articles_count = p.count
+        return HttpResponse(json.dumps({'articles':ser(articles,['id','title'],False),
+                                        'name':custome[0].nickname,
+                                        'count':articles_count}))
     else:
         return HttpResponse(json.dumps({"state":"fail"}))
 

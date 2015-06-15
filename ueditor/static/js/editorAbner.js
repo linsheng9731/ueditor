@@ -19,9 +19,9 @@ $(document).ready(function () {
     };
     /*调用方法如下：*/
     $.jqtab("#tabs", ".tab_con");
-    $.get('/getChannels',function(data){
+    $.get('/getChannels', function (data) {
         data = JSON.parse(data)
-        var options = data.map(function(e){
+        var options = data.map(function (e) {
             return "<option>" + e.title + "</option>"
         }).join(" ")
 
@@ -38,41 +38,50 @@ $(document).ready(function () {
         $.get('/getArticleInfo', {id: id}, function (data) {
             data = JSON.parse(data)
             $("#article-title").val(data.title)
-            ue.setContent('<p><img src="'+ data.image + '" /></p>'+data['body']);
+            ue.setContent('<p><img src="' + data.image + '" /></p>' + data['body']);
             $("select").val(data['channel'])
             $("#article-desc").val(data['desc'])
             console.log(data);
         })
     }
 
-    $("#saveSubmit").click(saveSubmit);
-
-
-    function saveSubmit() {
+    $("#saveSubmit").click(function saveSubmit(e) {
+        e = e|| window.event;
+        e.preventDefault();
         var content = ue.getContent();
-        var imgs =  $(content).find("img");
-        var firstImage =imgs[0]
-        imgs.each(function(i,e){
-            if(e.src.search(window.location.host) === -1){
-                e.src = "http://" + window.location.host + e.src;
+        var imgs = $(content).find("img");
+        var firstImage = imgs[0]
+        //imgs.each(function (i, e) {
+        //    if (e.src.search(window.location.host) === -1) {
+        //        e.src = "http://" + window.location.host + e.src;
+                //e.src = ""
+            //}
+        //})
+        //$(content).find("p").remove();
+        var b = "";
+        $(content).each(function(i, e){
+            if(i!=0){
+                b+= e.innerHTML;
             }
         })
-        $(content).find("p").remove();
+        content.find
         var imageSrc = firstImage && firstImage.src || "null";
         var data = {
-            'content': content,
+            'content': b,
             'title': $("#article-title").val(),
             'desc': $('#article-desc').val(),
             'image': imageSrc,
-            'id':id,
-            'channel':$("select").val()
+            'id': id,
+            'channel': $("select").val()
         };
-        var url = type === "modify"? "/modify": "/save";
+        var url = type === "modify" ? "/modify" : "/save";
         $.post(url, data, function (msg) {
-                msg = JSON.parse(msg);
-                if (msg.status === 'success') {
-                    alert("操作成功");
-                }
-            })
-        }
-});
+            msg = JSON.parse(msg);
+            if (msg.status === 'success') {
+                alert("操作成功");
+                window.location.href = "/";
+            }
+        })
+
+    })
+})
