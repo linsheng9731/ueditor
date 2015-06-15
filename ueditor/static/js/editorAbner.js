@@ -64,7 +64,6 @@ $(document).ready(function () {
                 b+= e.innerHTML;
             }
         })
-        content.find
         var imageSrc = firstImage && firstImage.src || "null";
         var data = {
             'content': b,

@@ -23,7 +23,7 @@ def auth(request):
     user = authenticate(username=username,password=password)
     if user is not None:
         login(request,user)
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/accounts/login')
 
@@ -34,4 +34,4 @@ def redirect_to_index(request):
 @login_required
 def unAuth(request):
     logout(request)
-    return HttpResponse(json.dumps({"STATE":"SUCCESS"}))
+    return HttpResponseRedirect("/")

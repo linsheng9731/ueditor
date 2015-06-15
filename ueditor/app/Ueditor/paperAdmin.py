@@ -28,7 +28,7 @@ def ser(model, param, serflag=True):  # model:待序列化的模型 param:待序
         else:
             return json_obj
 
-
+@login_required
 def index(request):
     return render_to_response('index.html')
 
