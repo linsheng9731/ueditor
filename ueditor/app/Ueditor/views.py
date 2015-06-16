@@ -3,7 +3,7 @@
 Created on 2012-8-29
 @author: Administrator
 '''
-server_address = "http://192.168.1.103:8000"
+server_address = "http://http://120.26.205.253:8001"
 from ueditor import settings
 
 from django.core.context_processors import csrf
@@ -223,17 +223,18 @@ def save(request):
     time = datetime.datetime.now().date()
     channel = request.POST['channel']
     channel_object = Channel.objects.get(title=channel)
-    article = Article.objects.create(author="abnerzheng",
+    article = Article.objects.create(author="",
                                      title=title,
                                      body=content,
                                      image=imagesrc,
                                      channel=channel_object,
                                      type="1",
                                      create_time=time,
-                                     url="www.baidu.com",
+                                     url="",
                                      desc= desc,
                                      day="1")
-
+    article.url = 'http://120.26.205.253/article.html?p=' + str(article.id)
+    article.save()
     customer.articles.add(article)
     return HttpResponse(json.dumps({"status":"success"}))
 
