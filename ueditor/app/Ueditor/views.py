@@ -3,7 +3,7 @@
 Created on 2012-8-29
 @author: Administrator
 '''
-server_address = "http://http://120.26.205.253:8001"
+server_address = "http://www.funpeach.com/:8001"
 from ueditor import settings
 
 from django.core.context_processors import csrf
@@ -235,7 +235,7 @@ def save(request):
                                      url="",
                                      desc= desc,
                                      day="1")
-    article.url = 'http://120.26.205.253/article.html?p=' + str(article.id)
+    article.url = 'http://www.funpeach.com/article.html?p=' + str(article.id)
     article.save()
     customer.articles.add(article)
     return HttpResponse(json.dumps({"status":"success"}))
