@@ -3,7 +3,7 @@
 Created on 2012-8-29
 @author: Administrator
 '''
-server_address = "http://www.funpeach.com/:8001"
+server_address = "http://www.funpeach.com:8001"
 from ueditor import settings
 
 from django.core.context_processors import csrf
