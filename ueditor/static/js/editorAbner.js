@@ -51,12 +51,12 @@ $(document).ready(function () {
         var content = ue.getContent();
         var imgs = $(content).find("img");
         var firstImage = imgs[0]
-        //imgs.each(function (i, e) {
-        //    if (e.src.search(window.location.host) === -1) {
-        //        e.src = "http://" + window.location.host + e.src;
+        imgs.each(function (i, e) {
+            if (e.src.search(window.location.host) === -1) {
+                e.src = "http://" + window.location.host + e.src;
                 //e.src = ""
-            //}
-        //})
+            }
+        });
         //$(content).find("p").remove();
         var b = "";
         $(content).each(function(i, e){
@@ -71,7 +71,8 @@ $(document).ready(function () {
             'desc': $('#article-desc').val(),
             'image': imageSrc,
             'id': id,
-            'channel': $("select").val()
+            'channel': $("select").val(),
+            'text':ue.getContentTxt()
         };
         var url = type === "modify" ? "/modify" : "/save";
         $.post(url, data, function (msg) {

@@ -219,6 +219,7 @@ def save(request):
     title = request.POST['title']
     desc = request.POST['desc']
     content = request.POST['content']
+    text = request.POST['text']
     imagesrc = request.POST['image']
     time = datetime.datetime.now().date()
     channel = request.POST['channel']
@@ -226,6 +227,7 @@ def save(request):
     article = Article.objects.create(author="",
                                      title=title,
                                      body=content,
+                                     text=text,
                                      image=imagesrc,
                                      channel=channel_object,
                                      type="1",
