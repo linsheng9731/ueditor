@@ -4,8 +4,6 @@
     <list default="true" id="c3f82b6d-2077-4220-a1c1-f6822f3efb57" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ueditor/static/js/editorAbner.js" afterPath="$PROJECT_DIR$/ueditor/static/js/editorAbner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ueditor/app/Ueditor/views.py" afterPath="$PROJECT_DIR$/ueditor/app/Ueditor/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ueditor.iws" />
@@ -139,7 +137,7 @@
       <file leaf-file-name="editorAbner.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ueditor/static/js/editorAbner.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6990132" vertical-offset="670" max-vertical-offset="1395">
+            <state vertical-scroll-proportion="1.1517615" vertical-offset="670" max-vertical-offset="1395">
               <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
               <folding>
                 <marker date="1434644335000" expanded="true" signature="1662:1912" placeholder="//..." />
@@ -221,6 +219,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -403,7 +402,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -717,7 +715,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37431693" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37381703" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280757" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26817447" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1233,7 +1231,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ueditor/static/js/editorAbner.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6990132" vertical-offset="670" max-vertical-offset="1395">
+        <state vertical-scroll-proportion="1.1517615" vertical-offset="670" max-vertical-offset="1395">
           <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
           <folding>
             <marker date="1434644335000" expanded="true" signature="1662:1912" placeholder="//..." />
