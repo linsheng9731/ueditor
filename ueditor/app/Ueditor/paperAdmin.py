@@ -90,6 +90,7 @@ def modify(request):
         desc = request.POST['desc']
         content = request.POST['content']
         imagesrc = request.POST['image']
+        text = request.POST['text']
         channel = request.POST['channel']
         channel = Channel.objects.get(title=channel)
 
@@ -99,6 +100,7 @@ def modify(request):
         article.body = content
         article.image = imagesrc
         article.channel = channel
+        article.text = text
 
         article.save()
 

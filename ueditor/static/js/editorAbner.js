@@ -35,14 +35,16 @@ $(document).ready(function () {
     if (match && match[1]) {//说明是修改文章
         type = "modify";
         id = match[1];
-        $.get('/getArticleInfo', {id: id}, function (data) {
-            data = JSON.parse(data)
-            $("#article-title").val(data.title)
-            ue.setContent('<p><img src="' + data.image + '" /></p>' + data['body']);
-            $("select").val(data['channel'])
-            $("#article-desc").val(data['desc'])
-            console.log(data);
-        })
+        setTimeout(function() {
+            $.get('/getArticleInfo', {id: id}, function (data) {
+                data = JSON.parse(data)
+                $("#article-title").val(data.title)
+                ue.setContent('<p><img src="' + data.image + '" /></p>' + data['body']);
+                $("select").val(data['channel'])
+                $("#article-desc").val(data['desc'])
+                console.log(data);
+            })
+        }, 1000)
     }
 
     $("#saveSubmit").click(function saveSubmit(e) {
