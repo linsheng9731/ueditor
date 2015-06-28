@@ -40,7 +40,7 @@ def getArticles(request):
     custome =  Customer.objects.filter(user=user)
 
     if custome and custome[0].type == "E":
-        articles = custome[0].articles.all()
+        articles = custome[0].articles.all().order_by("-id")
         p = Paginator(articles,10)
         page = int(request.GET.get("page", 1))
         ma = max(p.page_range)

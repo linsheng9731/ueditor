@@ -22,27 +22,6 @@
     <script src="/static/js/jquery.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        function promptOnClose(e) {
-            var promptString = '请确认您当前的内容已经妥善转存！';
-            return promptString;
-        }
-        if (window != top) {
-            top.location.href = "http://wxedit.yead.net";
-        }
-        else {
-            if (window.Event) {
-                window.onbeforeunload = function (event) {
-                    return promptOnClose(event);
-                }
-            }
-            else {
-                window.onbeforeunload = function () {
-                    return promptOnClose(event);
-                }
-            }
-        }
-    </script>
-    <script type="text/javascript">
         $(document).ready(function () {
             jQuery.jqtab = function (tabtit, tabcon) {
                 $(tabcon).hide();

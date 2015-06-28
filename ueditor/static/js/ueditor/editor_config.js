@@ -59,7 +59,7 @@
         //,fileFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
          //远程抓取配置区
-        //,catchRemoteImageEnable:true               //是否开启远程图片抓取,默认开启
+        ,catchRemoteImageEnable:false//是否开启远程图片抓取,默认开启
         ,catcherUrl:"/ueditor_getRemoteImage"   //处理远程图片抓取的地址
         ,catcherPath:""                  //图片修正地址，同imagePath
         //,catchFieldName:"upfile"                   //提交到后台远程图片uri合集，若此处修改，需要在后台对应文件修改对应参数
@@ -67,7 +67,7 @@
         //,localDomain:[]                            //本地顶级域名，当开启远程图片抓取时，除此之外的所有其它域名下的图片都将被抓取到本地,默认不抓取127.0.0.1和localhost
 
         //图片在线管理配置区
-        ,imageManagerUrl:"/ueditor_imageManager"       //图片在线管理的处理地址
+        //,imageManagerUrl:"/ueditor_imageManager"       //图片在线管理的处理地址
         ,imageManagerPath:""                                    //图片修正地址，同imagePath
 
         //屏幕截图配置区

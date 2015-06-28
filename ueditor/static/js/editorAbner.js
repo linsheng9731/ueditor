@@ -63,10 +63,11 @@ $(document).ready(function () {
         var b = "";
         $(content).each(function(i, e){
             if(i!=0){
-                b+= e.innerHTML;
+                b+= e.outerHTML;
             }
         })
         var imageSrc = firstImage && firstImage.src || "null";
+
         var data = {
             'content': b,
             'title': $("#article-title").val(),
@@ -76,14 +77,35 @@ $(document).ready(function () {
             'channel': $("select").val(),
             'text':ue.getContentTxt()
         };
+	if(data.content === ""){
+		alert("请输入文章内容");
+		return;
+	}else if(data.image === "null"){
+		alert("请在文章起始插入图片");
+		return;
+	}
         var url = type === "modify" ? "/modify" : "/save";
         $.post(url, data, function (msg) {
             msg = JSON.parse(msg);
             if (msg.status === 'success') {
-                alert("操作成功");
-                window.location.href = "/";
-            }
-        })
+		// 保存
+		if(msg.id !== undefined){
+			$.post("http://www.funpeach.com:8000/push_article",
+				{id:msg.id}, 
+				function(msg){
+					msg = JSON.parse(msg);
+					if(msg.status === "OK"){
+						alert("保存发布成功");
+						window.location.href = "/";
+						return;
+					}
+				}
+			       )
+		}else{	
+                	alert("修改成功");
+                	window.location.href = "/";
+            	}
+           }})
 
     })
 })

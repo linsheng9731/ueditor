@@ -238,7 +238,7 @@ def save(request):
     article.url = 'http://www.funpeach.com/article.html?p=' + str(article.id)
     article.save()
     customer.articles.add(article)
-    return HttpResponse(json.dumps({"status":"success"}))
+    return HttpResponse(json.dumps({"status":"success", "id":article.id}))
 
 @csrf_exempt
 def app_imgUp(request):
@@ -304,11 +304,6 @@ def __myuploadfile_2(fileObj, source_pictitle, source_filename, fileorpic='pic')
                 destination.write(chunk)
             destination.close()
 
-            if fileorpic == 'pic':
-                if fileExt.lower() in ('jpg', 'jpeg', 'bmp', 'gif', 'png'):
-                    im = Image.open(phisypath)
-                    im.thumbnail((720, 720))
-                    im.save(phisypath)
 
             real_url = server_address +  '/static/upload/' + subfolder + '/' + file_name + '.' + fileExt
             myresponse =  {
